@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./Components/Header/Header";
+import MainPage from "./Components/MainPage/MainPage";
+import Cargo from "./Components/Cargo/Cargo";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import LoginForm from "./Components/LoginForm/LoginForm";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = (props) => {
+    return (
+        <BrowserRouter>
+            <div className="main-content">
+                <Header></Header>
+                <div className="clearfix"></div>
+
+                <div className="inner_content">
+                    <Routes>
+                        <Route exact path="/MainPage" element={<MainPage/>}/>
+                        <Route exact path="/Cargo" element={<Cargo newsData={props.state.cargoPage.newsData} messagesData={props.state.cargoPage.MessagesData} addMessage={props.addMessage} />}/>
+                        <Route exact path="/LoginForm" element={<LoginForm/>}/>
+                    </Routes>
+                </div>
+
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;
