@@ -1,6 +1,5 @@
 import React from 'react';
 import './cargo.css'
-import {updateNewMessageText} from "../../redux/state";
 
 const Cargo = (props) => {
 
@@ -27,7 +26,7 @@ const Cargo = (props) => {
 
     let onMessageChange = () =>{
         let message = newMessage.current.value;
-        updateNewMessageText(message);
+        props.updateNewMessageText(message);
     }
 
     return (

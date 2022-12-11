@@ -3,7 +3,6 @@ import MainPage from "./Components/MainPage/MainPage";
 import Cargo from "./Components/Cargo/Cargo";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginForm from "./Components/LoginForm/LoginForm";
-import {updateNewMessageText} from "./redux/state";
 
 const App = (props) => {
     return (
@@ -15,7 +14,7 @@ const App = (props) => {
                 <div className="inner_content">
                     <Routes>
                         <Route exact path="/MainPage" element={<MainPage/>}/>
-                        <Route exact path="/Cargo" element={<Cargo state={props.state.cargoPage} addMessage={props.addMessage} updateNewMessageText={updateNewMessageText} />}/>
+                        <Route exact path="/Cargo" element={<Cargo state={props.state.cargoPage} addMessage={props.addMessage} updateNewMessageText={props.updateNewMessageText} />}/>
                         <Route exact path="/LoginForm" element={<LoginForm/>}/>
                     </Routes>
                 </div>

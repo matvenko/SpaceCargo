@@ -1,25 +1,22 @@
 import React from 'react';
-import state, {subscribe} from "./redux/state";
 import ReactDOM from 'react-dom/client';
+import App from './App';
+import store from './redux/state'
 
 import './css/bootstrap.css';
 import './css/style.css';
 import './css/font-awesome.css';
-import App from './App';
-import {addMessage, updateNewMessageText} from "./redux/state";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-let rerenderEntireTree = (props) => {
+let rerenderEntireTree = (state) => {
     root.render(
         <React.StrictMode>
-            <App state={props} addMessage={addMessage} updateNewMessageText={updateNewMessageText} />
+            <App state={state} addMessage={store.addMessage.bind(store)} updateNewMessageText={store.updateNewMessageText.bind(store)} />
         </React.StrictMode>
     );
 }
 
-subscribe(rerenderEntireTree)
-
-
-rerenderEntireTree(state);
+rerenderEntireTree(store.getState());
+store.subscribe(rerenderEntireTree)
