@@ -21,12 +21,13 @@ const Cargo = (props) => {
     let newMessage = React.createRef()
 
     let addMessage = () => {
-        props.addMessage();
+        props.dispatch({type: 'ADD-MESSAGE'});
     }
 
     let onMessageChange = () =>{
         let message = newMessage.current.value;
-        props.updateNewMessageText(message);
+        let updateMessage = {type: 'UPDATE_NEW_MESSAGE', newMessage: message};
+        props.dispatch(updateMessage);
     }
 
     return (

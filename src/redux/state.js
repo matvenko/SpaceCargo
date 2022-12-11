@@ -34,20 +34,21 @@ let store = {
     subscribe(observer){
         this._callSubscriber = observer;
     },
-    addMessage() {
-        let newMessage = {
-            id: 7,
-            message: this._state.cargoPage.newMessageText
+    dispatch(action) {
+        if(action.type = 'ADD-MESSAGE'){
+            let newMessage = {
+                id: 7,
+                message: this._state.cargoPage.newMessageText
+            }
+            this._state.cargoPage.messagesData.push(newMessage);
+            this._state.cargoPage.newMessageText='';
+            this._callSubscriber(this._state);
+        }else if(action.type = 'UPDATE_NEW_MESSAGE'){
+            this._state.cargoPage.newMessageText = action.newMessage;
+            this._callSubscriber(this._state);
         }
-        this._state.cargoPage.messagesData.push(newMessage);
-        this._state.cargoPage.newMessageText='';
-        this._callSubscriber(this._state);
-    },
-    updateNewMessageText(newMessage){
-        this._state.cargoPage.newMessageText = newMessage;
-        this._callSubscriber(this._state);
-    }
 
+    }
 }
 
 export default  store;
