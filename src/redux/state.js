@@ -1,3 +1,6 @@
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
+
 let store = {
     _state: {
         cargoPage: {
@@ -35,7 +38,7 @@ let store = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        if(action.type = 'ADD-MESSAGE'){
+        if(action.type === 'ADD-MESSAGE'){
             let newMessage = {
                 id: 7,
                 message: this._state.cargoPage.newMessageText
@@ -43,11 +46,20 @@ let store = {
             this._state.cargoPage.messagesData.push(newMessage);
             this._state.cargoPage.newMessageText='';
             this._callSubscriber(this._state);
-        }else if(action.type = 'UPDATE_NEW_MESSAGE'){
+        }else if(action.type === 'UPDATE-NEW-MESSAGE'){
             this._state.cargoPage.newMessageText = action.newMessage;
             this._callSubscriber(this._state);
         }
 
+    }
+}
+
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
+
+export const updateNewMessageActionCreator = (message) => {
+    return {
+        type: UPDATE_NEW_MESSAGE,
+        newMessage: message
     }
 }
 

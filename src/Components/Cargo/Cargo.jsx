@@ -1,15 +1,16 @@
 import React from 'react';
 import './cargo.css'
+import {addMessageActionCreator, updateNewMessageActionCreator} from "../../redux/state";
 
 const Cargo = (props) => {
 
-    const NewsItem = (props) => {
+    let NewsItem = (props) => {
         return (
             <li> {props.description}</li>
         )
     }
 
-    const MessageItem = (props) => {
+    let MessageItem = (props) => {
         return (
             <div> {props.description}</div>
         )
@@ -21,13 +22,12 @@ const Cargo = (props) => {
     let newMessage = React.createRef()
 
     let addMessage = () => {
-        props.dispatch({type: 'ADD-MESSAGE'});
+        props.dispatch(addMessageActionCreator());
     }
 
     let onMessageChange = () =>{
         let message = newMessage.current.value;
-        let updateMessage = {type: 'UPDATE_NEW_MESSAGE', newMessage: message};
-        props.dispatch(updateMessage);
+        props.dispatch(updateNewMessageActionCreator(message));
     }
 
     return (
