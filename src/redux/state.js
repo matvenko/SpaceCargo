@@ -10,15 +10,16 @@ let state = {
             {id: 5, description: 'საკონსულტაციო დახმარება ნებისმიერი სახის საქონლის (კანონით დადგენილი) მოძიებასა და შესყიდვასთან დაკავშირებით'},
             {id: 6, description: 'მოქნილი და კომფორტული გადახდის საშუალებები (საბანკო გადარიცხვა, სწრაფი გადახდის აპარატები, ონლაინ და მობაილ გადახდები)'}
         ],
-        MessagesData: [
+        messagesData: [
             {id: 1, message: 'Hi'},
             {id: 2, message: 'Hello'},
             {id: 3, message: 'How are you'},
             {id: 4, message: 'fine, thanks'},
-            {id: 5, message: 'bb'}
-        ]
+            {id: 5, message: 'BB'}
+        ],
+        newMessageText: 'write text'
     },
-    loginpage: [
+    loginPage: [
         {
             username: 'mate',
             token: '?????'
@@ -26,15 +27,22 @@ let state = {
     ]
 }
 
-export let addMessage = (message) =>{
-    let _message = {
+window.state = state;
+
+export let addMessage = () => {
+    let newMessage = {
         id: 7,
-        message: message
+        message: state.cargoPage.newMessageText
     }
-    state.cargoPage.MessagesData.push(_message);
-    rerenderEntireTree()
+    state.cargoPage.messagesData.push(newMessage);
+    state.cargoPage.newMessageText='';
+    rerenderEntireTree(state);
 }
 
+export let updateNewMessageText = (newMessage) => {
+    state.cargoPage.newMessageText = newMessage;
+    rerenderEntireTree(state);
+}
 
 
 export default  state;

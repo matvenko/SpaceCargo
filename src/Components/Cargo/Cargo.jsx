@@ -1,28 +1,33 @@
 import React from 'react';
 import './cargo.css'
+import {updateNewMessageText} from "../../redux/state";
 
 const Cargo = (props) => {
 
     const NewsItem = (props) => {
-        return(
-            <li> { props.description }</li>
+        return (
+            <li> {props.description}</li>
         )
     }
 
     const MessageItem = (props) => {
-        return(
-            <div> { props.description }</div>
+        return (
+            <div> {props.description}</div>
         )
     }
 
-    let newsElements = props.newsData.map(newsItem => <NewsItem id={newsItem.id} description={newsItem.description} /> );
-    let messagesData = props.messagesData.map(message=> <MessageItem id={message.id} description={message.message} /> );
+    let newsElements = props.state.newsData.map(newsItem => <NewsItem id={newsItem.id} description={newsItem.description}/>);
+    let messagesData = props.state.messagesData.map(message => <MessageItem id={message.id} description={message.message}/>);
 
     let newMessage = React.createRef()
 
-        let addMessage = () => {
-        let _message = newMessage.current.value;
-        props.addMessage(_message)
+    let addMessage = () => {
+        props.addMessage();
+    }
+
+    let onMessageChange = () =>{
+        let message = newMessage.current.value;
+        updateNewMessageText(message);
     }
 
     return (
@@ -30,20 +35,20 @@ const Cargo = (props) => {
             <div>
                 <h3>რატომ ირჩევენ სფეის კარგოს</h3>
                 <ul>
-                    { newsElements }
+                    {newsElements}
                 </ul>
             </div>
             <div>
                 <div>
-                    <textarea ref={newMessage}></textarea>
+                    <textarea ref={newMessage} onChange={onMessageChange} value={props.state.newMessageText} />
                 </div>
                 <div>
-                    <button onClick={ addMessage }> Add Message</button>
+                    <button onClick={addMessage}> Add Message</button>
                 </div>
             </div>
 
             <div>
-                { messagesData }
+                {messagesData}
             </div>
         </div>
     )
