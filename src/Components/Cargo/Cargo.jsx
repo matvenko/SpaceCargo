@@ -1,6 +1,6 @@
 import React from 'react';
 import './cargo.css'
-import {addMessageActionCreator, updateNewMessageActionCreator} from "../../redux/state";
+import {addMessageActionCreator, updateNewMessageActionCreator} from "../../redux/cargo-reducer";
 
 const Cargo = (props) => {
 

@@ -1,5 +1,5 @@
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
+import cargoReducer from "./cargo-reducer";
+import loginReducer from "./login-reducer";
 
 let store = {
     _state: {
@@ -38,30 +38,12 @@ let store = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        if(action.type === 'ADD-MESSAGE'){
-            let newMessage = {
-                id: 7,
-                message: this._state.cargoPage.newMessageText
-            }
-            this._state.cargoPage.messagesData.push(newMessage);
-            this._state.cargoPage.newMessageText='';
-            this._callSubscriber(this._state);
-        }else if(action.type === 'UPDATE-NEW-MESSAGE'){
-            this._state.cargoPage.newMessageText = action.newMessage;
-            this._callSubscriber(this._state);
-        }
-
+        this._state.cargoPage = cargoReducer(this._state.cargoPage, action);
+        this._state.loginPage = loginReducer(this._state.loginPage, action);
+        this._callSubscriber(this._state);
     }
 }
 
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
-
-export const updateNewMessageActionCreator = (message) => {
-    return {
-        type: UPDATE_NEW_MESSAGE,
-        newMessage: message
-    }
-}
 
 export default  store;
 window.store = store;
