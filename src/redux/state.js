@@ -1,4 +1,6 @@
-import {rerenderEntireTree} from "../render";
+let rerenderEntireTree = () => {
+    console.log("temporary")
+}
 
 let state = {
     cargoPage: {
@@ -39,9 +41,13 @@ export let addMessage = () => {
     rerenderEntireTree(state);
 }
 
-export let updateNewMessageText = (newMessage) => {
+export const updateNewMessageText = (newMessage) => {
     state.cargoPage.newMessageText = newMessage;
     rerenderEntireTree(state);
+}
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer;
 }
 
 
