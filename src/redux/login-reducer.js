@@ -1,4 +1,11 @@
-const loginReducer = (state, action) => {
+
+
+let initialStete = {
+    username: 'mate',
+    token: '?????'
+}
+
+const loginReducer = (state = initialStete, action) => {
     return state;
 }
 

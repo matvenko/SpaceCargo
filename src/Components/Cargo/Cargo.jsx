@@ -3,7 +3,7 @@ import './cargo.css'
 import {addMessageActionCreator, updateNewMessageActionCreator} from "../../redux/cargo-reducer";
 
 const Cargo = (props) => {
-
+debugger
     let NewsItem = (props) => {
         return (
             <li> {props.description}</li>

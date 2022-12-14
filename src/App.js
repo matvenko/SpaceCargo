@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginForm from "./Components/LoginForm/LoginForm";
 
 const App = (props) => {
+    debugger
     return (
         <BrowserRouter>
             <div className="main-content">
