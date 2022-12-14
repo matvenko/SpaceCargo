@@ -1,28 +1,24 @@
 import React from 'react';
 import {addMessageActionCreator, updateNewMessageActionCreator} from "../../redux/cargo-reducer";
 import Cargo from "./Cargo";
+import {connect} from "react-redux";
 
-
-const CargoContainer = (props) => {
-
-    let state = props.store.getState().cargoPage
-
-    let addMessage = () => {
-        props.store.dispatch(addMessageActionCreator());
+let mapStateToProps = (state) =>{
+    return {
+        cargoPage: state.cargoPage
     }
-
-    let onMessageChange = (message) =>{
-        props.store.dispatch(updateNewMessageActionCreator(message));
-    }
-
-    return (
-        <Cargo
-            updateNewMessageText={onMessageChange}
-            addMessage={addMessage}
-            newsData={state.newsData}
-            messagesData={state.messagesData}
-            newMessageText={state.newMessageText} />
-    )
 }
+let mapDispatchToProps = (dispatch) =>{
+    return{
+        addMessage: () => {
+            dispatch(addMessageActionCreator())
+        },
+        onMessageChange: (message) => {
+            dispatch(updateNewMessageActionCreator(message))
+        }
+    }
+}
+
+const CargoContainer = connect(mapStateToProps, mapDispatchToProps)(Cargo);
 
 export default CargoContainer;

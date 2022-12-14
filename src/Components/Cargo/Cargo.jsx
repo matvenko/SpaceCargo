@@ -3,8 +3,8 @@ import './cargo.css'
 
 const Cargo = (props) => {
 
-    let newsElements = props.newsData.map(newsItem => <li  id={newsItem.id}> {newsItem.description}</li>);
-    let messagesData = props.messagesData.map(message => <div id={message.id}>{message.message}</div>);
+    let newsElements = props.cargoPage.newsData.map(newsItem => <li key={newsItem.id} id={newsItem.id}> {newsItem.description}</li>);
+    let messagesData = props.cargoPage.messagesData.map(message => <div key={message.id}id={message.id}>{message.message}</div>);
 
     let newMessage = React.createRef()
 
@@ -14,7 +14,7 @@ const Cargo = (props) => {
 
     let onMessageChange = () =>{
         let message = newMessage.current.value;
-        props.updateNewMessageText(message);
+        props.onMessageChange(message);
     }
 
     return (
@@ -27,7 +27,7 @@ const Cargo = (props) => {
             </div>
             <div>
                 <div>
-                    <textarea ref={newMessage} onChange={onMessageChange} value={props.newMessageText} />
+                    <textarea ref={newMessage} onChange={onMessageChange} value={props.cargoPage.newMessageText} />
                 </div>
                 <div>
                     <button onClick={addMessage}> Add Message</button>

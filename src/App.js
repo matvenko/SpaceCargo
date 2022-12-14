@@ -14,7 +14,7 @@ const App = (props) => {
                 <div className="inner_content">
                     <Routes>
                         <Route exact path="/MainPage" element={<MainPage/>}/>
-                        <Route exact path="/Cargo" element={<CargoContainer store={props.store}/>}/>
+                        <Route exact path="/Cargo" element={<CargoContainer />}/>
                         <Route exact path="/LoginForm" element={<LoginForm/>}/>
                     </Routes>
                 </div>
