@@ -1,33 +1,20 @@
 import React from 'react';
 import './cargo.css'
-import {addMessageActionCreator, updateNewMessageActionCreator} from "../../redux/cargo-reducer";
 
 const Cargo = (props) => {
-debugger
-    let NewsItem = (props) => {
-        return (
-            <li> {props.description}</li>
-        )
-    }
 
-    let MessageItem = (props) => {
-        return (
-            <div> {props.description}</div>
-        )
-    }
-
-    let newsElements = props.state.newsData.map(newsItem => <NewsItem id={newsItem.id} description={newsItem.description}/>);
-    let messagesData = props.state.messagesData.map(message => <MessageItem id={message.id} description={message.message}/>);
+    let newsElements = props.newsData.map(newsItem => <li  id={newsItem.id}> {newsItem.description}</li>);
+    let messagesData = props.messagesData.map(message => <div id={message.id}>{message.message}</div>);
 
     let newMessage = React.createRef()
 
     let addMessage = () => {
-        props.dispatch(addMessageActionCreator());
+        props.addMessage();
     }
 
     let onMessageChange = () =>{
         let message = newMessage.current.value;
-        props.dispatch(updateNewMessageActionCreator(message));
+        props.updateNewMessageText(message);
     }
 
     return (
@@ -40,7 +27,7 @@ debugger
             </div>
             <div>
                 <div>
-                    <textarea ref={newMessage} onChange={onMessageChange} value={props.state.newMessageText} />
+                    <textarea ref={newMessage} onChange={onMessageChange} value={props.newMessageText} />
                 </div>
                 <div>
                     <button onClick={addMessage}> Add Message</button>
