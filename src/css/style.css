@@ -33,3 +33,52 @@ a:focus{
 	outline:none;
 	text-decoration:none;
 }
+
+.usersTable{
+	margin: 20px;
+}
+
+.usersTableRow{
+	display: flex;
+	flex-wrap: nowrap;
+	background-color: #7BA7CE;
+	margin: 15px 0;
+}
+
+.usersTableRow > div {
+	background-color: #f1f1f1;
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: 0;
+	text-align: center;
+	border: 1px solid #4a77d4;
+	vertical-align: middle;
+	line-height: 60px;
+	font-size: 24px;
+	font-family: cursive;
+}
+
+.usersTableRow > div img{
+	width: 20%;
+}
+
+.usersTableRow > div button{
+	width: 100px;
+	height: 40px;
+	font-family: Bahnschrift;
+	text-align: center;
+	font-size: 14px;
+	margin-top: 10px;
+	margin-left: 10px;
+	line-height: 40px;
+	background-color: #4a77d4;
+	color: #FFFFFF;
+	border-radius: 6px;
+	border: none;
+	border-bottom: 3px solid #001e35;
+}
+
+.usersTableRow > div button:active{
+	border: none;
+	margin-top: 14px;
+}

@@ -3,6 +3,8 @@ import MainPage from "./Components/MainPage/MainPage";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginForm from "./Components/LoginForm/LoginForm";
 import CargoContainer from "./Components/Cargo/CargoContainer";
+import UsersContainer from "./Components/Users/UsersContainer";
+
 
 const App = (props) => {
     return (
@@ -16,6 +18,8 @@ const App = (props) => {
                         <Route exact path="/MainPage" element={<MainPage/>}/>
                         <Route exact path="/Cargo" element={<CargoContainer />}/>
                         <Route exact path="/LoginForm" element={<LoginForm/>}/>
+                        <Route exact path="/" element={<LoginForm/>}/>
+                        <Route exact path="/Users" element={<UsersContainer/>} />
                     </Routes>
                 </div>
 
