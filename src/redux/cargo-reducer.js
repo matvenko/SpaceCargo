@@ -27,12 +27,17 @@ const cargoReducer = (state = initialState, action) => {
                 id: 7,
                 message: state.newMessageText
             }
-            state.messagesData.push(newMessage);
-            state.newMessageText = '';
-            return state;
+
+            let stateCopy = { ...state };
+            stateCopy.newsData= [ ...state.newsData ];
+            stateCopy.messagesData = [ ...state.messagesData ];
+            stateCopy.messagesData.push(newMessage);
+            stateCopy.newMessageText = '';
+            return stateCopy;
         case UPDATE_NEW_MESSAGE:
-            state.newMessageText = action.newMessage;
-            return state;
+            let stateCopy2 = { ...state };
+            stateCopy2.newMessageText = action.newMessage;
+            return stateCopy2;
         default:
             return state;
 

@@ -11,18 +11,11 @@ import {Provider} from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-let rerenderEntireTree = (state) => {
-
     root.render(
         <Provider store={store}>
             <React.StrictMode>
-                <App state={state} store={store} dispatch={store.dispatch.bind(store)} />
+                <App />
             </React.StrictMode>
         </Provider>
     );
-}
 
-rerenderEntireTree(store.getState());
-store.subscribe(() => {
-    rerenderEntireTree(store.getState());
-})
