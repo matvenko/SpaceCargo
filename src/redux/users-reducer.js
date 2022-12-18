@@ -1,8 +1,8 @@
 const FOLLOW = 'Follow'
 const UNFOLLOW = 'UnFollow'
 const SET_USERS = 'Set-Users'
-const SET_CURRENT_PAGE = 'set-current-page'
-const SET_TOTAL_USERS_COUNT = 'set-total-users-count'
+const SET_CURRENT_PAGE = 'Set-current-page'
+const SET_TOTAL_USERS_COUNT = 'Set-total-users-count'
 
 let initialState = {
     users: [ ],
@@ -25,7 +25,11 @@ const usersReducer = (state = initialState, action) => {
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => u.id === action.userId ? { ...u, followed: false} : u)
+                users: state.users.map( u => {
+                    if(u.id === action.userId){
+                        return { ...u, followed: false}
+                    }
+                })
             }
         case SET_USERS:{
             return {  ...state, users: action.users  }
