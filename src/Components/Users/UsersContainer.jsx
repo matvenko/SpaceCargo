@@ -1,15 +1,10 @@
 import React from "react";
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC, toggleIsFetchingAC,
-    unfollowAC
+    followUser, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, unfollowUser
 } from "../../redux/users-reducer";
 import {connect} from "react-redux";
 import Users from "./Users";
 import axios from "axios";
-import preLoader from "../../assets/images/loader.svg"
 import PreLoader from "../common/PreLoader";
 
 class UsersComponent extends React.Component {
@@ -55,7 +50,6 @@ class UsersComponent extends React.Component {
     }
 }
 
-
 let mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,
@@ -66,29 +60,11 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        followUser: (userId) =>{
-            dispatch(followAC(userId))
-        },
-        unfollowUser: (userId) => {
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (currentPage) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalUsersCount: (totalUsersCount) => {
-            dispatch(setTotalUsersCountAC(totalUsersCount))
-        },
-        toggleIsFetching: (isFetchind) => {
-            dispatch(toggleIsFetchingAC(isFetchind))
-        }
-    }
-}
-
-
-
-export default  connect(mapStateToProps, mapDispatchToProps)(UsersComponent)
+export default  connect(mapStateToProps, {
+    followUser,
+    unfollowUser,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsFetching
+})(UsersComponent)
