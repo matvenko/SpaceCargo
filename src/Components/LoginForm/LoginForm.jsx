@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 const LoginForm = () => {
     return (<div className='loginPageContent'>
 
-            <div className="w3_agileits_top_nav">
+            <div className="w3agileitstopnav">
                 <ul id="gn-menu" className="gn-menu-main">
 
                     <li className="second logo admin">

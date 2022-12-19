@@ -1,17 +1,17 @@
-import Header from "./Components/Header/Header";
 import MainPage from "./Components/MainPage/MainPage";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginForm from "./Components/LoginForm/LoginForm";
 import CargoContainer from "./Components/Cargo/CargoContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContainer from "./Components/Profile/Profile";
+import HeaderContainer from "./Components/Header/HeaderContainer";
 
 
 const App = (props) => {
     return (
         <BrowserRouter>
             <div className="main-content">
-                <Header></Header>
+                <HeaderContainer></HeaderContainer>
                 <div className="clearfix"></div>
 
                 <div className="inner_content">

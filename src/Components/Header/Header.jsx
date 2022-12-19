@@ -2,7 +2,7 @@ import React from 'react';
 import './header.css'
 import {NavLink} from "react-router-dom";
 
-const Header = () => {
+const Header = (props) => {
     return (<div className="w3_agileits_top_nav">
         <ul id="gn-menu" className="gn-menu-main">
             <li className="gn-trigger">
@@ -92,11 +92,16 @@ const Header = () => {
 
                         <div className="profile_img">
                                     <span className="prfil-img">
-                                            <NavLink to="/LoginForm">
-                                            <img
-                                                src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
-                                                alt=""/>
-                                            </NavLink>
+                                        {
+                                            props.isAuth
+                                                ? props.login
+                                                : <NavLink to="/LoginForm">
+                                                    <img
+                                                        src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
+                                                        alt=""/>
+                                                </NavLink>
+                                        }
+
                                     </span>
                         </div>
 
