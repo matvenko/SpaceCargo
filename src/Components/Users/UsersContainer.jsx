@@ -9,14 +9,18 @@ import PreLoader from "../common/PreLoader";
 
 class UsersComponent extends React.Component {
 
+
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
-            });
+        if(this.props.users.length < 1){
+            console.log("----------")
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users/?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+                .then(response => {
+                    this.props.toggleIsFetching(false)
+                    this.props.setUsers(response.data.items);
+                    this.props.setTotalUsersCount(response.data.totalCount);
+                });
+        }
     }
 
     onSetCurrentPage = (currentPage) => {
