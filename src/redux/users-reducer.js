@@ -7,7 +7,7 @@ const TOGGLE_IS_FETCHING = 'fetching'
 
 let initialState = {
     users: [ ],
-    pageSize: 6,
+    pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false
@@ -22,6 +22,7 @@ const usersReducer = (state = initialState, action) => {
                     if(u.id === action.userId){
                         return { ...u, followed: true}
                     }
+                    return u;
                 })
             }
         case UNFOLLOW:
@@ -31,6 +32,7 @@ const usersReducer = (state = initialState, action) => {
                     if(u.id === action.userId){
                         return { ...u, followed: false}
                     }
+                    return u;
                 })
             }
         case SET_USERS:{
@@ -43,7 +45,7 @@ const usersReducer = (state = initialState, action) => {
             return {  ...state, totalUsersCount: action.totalUsersCount  }
         }
         case TOGGLE_IS_FETCHING:{
-            return {  ...state, TOGGLE_IS_FETCHING: action.isFetching  }
+            return {  ...state, isFetching: action.isFetching  }
         }
         default:
             return state
