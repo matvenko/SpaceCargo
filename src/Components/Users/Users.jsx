@@ -17,8 +17,10 @@ let Users = (props) => {
                 {
                     pages.map(p =>
                         <span key={p} className={props.currentPage === p ? "selectedPage" : ''}
-                              onClick={() => {props.onSetCurrentPage(p)}}>
-                            { p }
+                              onClick={() => {
+                                  props.onSetCurrentPage(p)
+                              }}>
+                            {p}
                         </span>
                     )
                 }
@@ -34,26 +36,27 @@ let Users = (props) => {
                             </NavLink>
 
                             {u.followed
-                                ? <button onClick={() =>{
-                                    props.toggleIsFetching(true);
+                                ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    props.toggleFollowingProgress(true, u.id);
                                     userAPI.axUnFollowUser(u.id).then(data => {
-                                            props.toggleIsFetching(false)
-                                            if(data.resultCode == 0){
-                                                props.unfollowUser(u.id)
-                                            }
-                                        });
-                                    }
+                                        props.toggleIsFetching(false)
+                                        if (data.resultCode == 0) {
+                                            props.unfollowUser(u.id)
+                                        }
+                                        props.toggleFollowingProgress(false, u.id);
+                                    });
+                                }
                                 }> Unfollow</button>
-                                : <button onClick={() =>
-                                {
-                                    props.toggleIsFetching(true);
+                                : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    props.toggleFollowingProgress(true, u.id);
                                     userAPI.axFollowUser(u.id).then(data => {
                                         props.toggleIsFetching(false)
-                                            if(data.resultCode == 0){
-                                                props.followUser(u.id)
-                                            }
-                                        });
-                                   }
+                                        if (data.resultCode == 0) {
+                                            props.followUser(u.id)
+                                        }
+                                        props.toggleFollowingProgress(false, u.id);
+                                    });
+                                }
                                 }> Follow</button>
                             }
                         </div>

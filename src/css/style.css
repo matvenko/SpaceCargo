@@ -78,6 +78,11 @@ a:focus{
 	border-bottom: 3px solid #001e35;
 }
 
+.usersTableRow > div button:disabled{
+	background-color: #001e35;
+}
+
+
 .usersTableRow > div button:active{
 	border: none;
 	margin-top: 14px;
