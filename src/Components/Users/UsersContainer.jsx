@@ -4,41 +4,38 @@ import {
 } from "../../redux/users-reducer";
 import {connect} from "react-redux";
 import Users from "./Users";
-import axios from "axios";
 import PreLoader from "../common/PreLoader";
+import {userAPI} from "../api/api";
 
 class UsersComponent extends React.Component {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        if(this.props.users.length < 1){
+        if (this.props.users.length < 1) {
             console.log("Start ---------- UsersComponent")
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users/?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-                withCredentials: true
-            }).then(response => {
-                    this.props.toggleIsFetching(false)
-                    this.props.setUsers(response.data.items);
-                    this.props.setTotalUsersCount(response.data.totalCount);
-                });
+
+            userAPI.axGetUsers(this.props.currentPage, this.props.pageSize).then(data => {
+                this.props.toggleIsFetching(false)
+                this.props.setUsers(data.items);
+                this.props.setTotalUsersCount(data.totalCount);
+            });
         }
     }
 
     onSetCurrentPage = (currentPage) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(currentPage)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?page=${currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        }).then(response => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
-            });
+        userAPI.axGetUsers(currentPage, this.props.pageSize).then(data => {
+            this.props.toggleIsFetching(false)
+            this.props.setUsers(data.items)
+        });
     }
 
     render() {
         return <>
             {
                 this.props.isFetching
-                    ? <PreLoader />
+                    ? <PreLoader/>
                     : <Users
                         totalUsersCount={this.props.totalUsersCount}
                         pageSize={this.props.pageSize}
@@ -65,7 +62,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default  connect(mapStateToProps, {
+export default connect(mapStateToProps, {
     followUser,
     unfollowUser,
     setUsers,

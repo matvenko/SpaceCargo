@@ -1,7 +1,7 @@
 import React from "react";
 import UserPhoto from "../../assets/images/tako.jpg";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {userAPI} from "../api/api";
 
 let Users = (props) => {
 
@@ -36,11 +36,9 @@ let Users = (props) => {
                             {u.followed
                                 ? <button onClick={() =>{
                                     props.toggleIsFetching(true);
-                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{
-                                        withCredentials: true
-                                    }).then(response => {
+                                    userAPI.axUnFollowUser(u.id).then(data => {
                                             props.toggleIsFetching(false)
-                                            if(response.data.resultCode == 0){
+                                            if(data.resultCode == 0){
                                                 props.unfollowUser(u.id)
                                             }
                                         });
@@ -49,11 +47,9 @@ let Users = (props) => {
                                 : <button onClick={() =>
                                 {
                                     props.toggleIsFetching(true);
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                        withCredentials: true
-                                    }).then(response => {
+                                    userAPI.axFollowUser(u.id).then(data => {
                                         props.toggleIsFetching(false)
-                                            if(response.data.resultCode == 0){
+                                            if(data.resultCode == 0){
                                                 props.followUser(u.id)
                                             }
                                         });
