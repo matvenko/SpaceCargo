@@ -1,9 +1,10 @@
 import React from "react";
 import UserPhoto from "../../assets/images/tako.jpg";
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 
 let Users = (props) => {
 
+    if(!props.isAuth){ return <Navigate to="/LoginForm" replace={true} /> };
     // let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pageCount = 40;
     let pages = [];

@@ -35,6 +35,7 @@ class UsersComponent extends React.Component {
                         isFetching={this.props.isFetching}
                         toggleIsFetching={this.props.toggleIsFetching}
                         followingInProgress={this.props.followingInProgress}
+                        isAuth={this.props.isAuth}
                     />}
 
         </>
@@ -48,7 +49,8 @@ let mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
+        isAuth: state.auth.isAuth
     }
 }
 
