@@ -1,7 +1,6 @@
 import React from "react";
 import UserPhoto from "../../assets/images/tako.jpg";
 import {NavLink} from "react-router-dom";
-import {userAPI} from "../api/api";
 
 let Users = (props) => {
 
@@ -17,9 +16,7 @@ let Users = (props) => {
                 {
                     pages.map(p =>
                         <span key={p} className={props.currentPage === p ? "selectedPage" : ''}
-                              onClick={() => {
-                                  props.onSetCurrentPage(p)
-                              }}>
+                              onClick={() => { props.onSetCurrentPage(p) }}>
                             {p}
                         </span>
                     )
@@ -35,30 +32,11 @@ let Users = (props) => {
                                 <img src={u.photos.small != null ? u.photos.small : UserPhoto} width={"100px"}/>
                             </NavLink>
 
-                            {u.followed
-                                ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                    props.toggleFollowingProgress(true, u.id);
-                                    userAPI.axUnFollowUser(u.id).then(data => {
-                                        props.toggleIsFetching(false)
-                                        if (data.resultCode == 0) {
-                                            props.unfollowUser(u.id)
-                                        }
-                                        props.toggleFollowingProgress(false, u.id);
-                                    });
-                                }
-                                }> Unfollow</button>
-                                : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                    props.toggleFollowingProgress(true, u.id);
-                                    userAPI.axFollowUser(u.id).then(data => {
-                                        props.toggleIsFetching(false)
-                                        if (data.resultCode == 0) {
-                                            props.followUser(u.id)
-                                        }
-                                        props.toggleFollowingProgress(false, u.id);
-                                    });
-                                }
-                                }> Follow</button>
-                            }
+
+                            <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                    onClick={() => { props.followUnfollowUserTh(u.id, u.followed ? 'UnFollow' : 'Follow') }}>
+                                {u.followed ? 'UnFollow' : 'Follow'}
+                            </button>
                         </div>
                         <div> {u.name} </div>
                         <div> {u.status ? u.status : 'Beginner'} </div>

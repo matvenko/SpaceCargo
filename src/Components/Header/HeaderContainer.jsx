@@ -8,7 +8,7 @@ import {profileAPI} from "../api/api";
 class HeaderContainer extends React.Component {
 
     componentDidMount() {
-        profileAPI.axAuthMe().then(data => {
+        profileAPI.AuthMeAx().then(data => {
             if (data.resultCode === 0) {
                 let {id, login, email} = data.data;
                 this.props.setAuthUserData(id, email, login);

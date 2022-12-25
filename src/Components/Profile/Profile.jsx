@@ -22,7 +22,7 @@ class ProfileContainer extends  React.Component {
         if(!userId){
             userId=17734;
         }
-        profileAPI.axGetProfile(userId)
+        profileAPI.GetProfileAx(userId)
             .then(data => {
                this.props.setUserProfile(data)
             });
