@@ -5,6 +5,7 @@ import PreLoader from "../common/PreLoader";
 import {useParams} from 'react-router-dom';
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import ProfileStatus from "./ProfileStatus";
 
 
 export function withRouter(Children){
@@ -57,6 +58,9 @@ let Profile = (props) => {
                     <li>{props.userProfile.contacts.instagram}</li>
                 </ul>
             </div>
+
+            <ProfileStatus status={"Hello my friends"}/>
+
         </div>
     )
 }

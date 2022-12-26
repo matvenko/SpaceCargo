@@ -18,7 +18,7 @@ const Cargo = (props) => {
 
     return (
         <div className="CargoPage">
-            <div>
+            <div className={"cargoList"}>
                 <h3>რატომ ირჩევენ სფეის კარგოს</h3>
                 <ul>
                     {newsElements}
