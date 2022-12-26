@@ -75,7 +75,6 @@ export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_C
 
 export const getUsers = (currentPage, pageSize) => {
     return (dispatch) => {
-        console.log("Start ---------- UsersComponent")
         dispatch(toggleIsFetching(true));
         userAPI.GetUsersAx(currentPage, pageSize).then(data => {
             dispatch(toggleIsFetching(false));
