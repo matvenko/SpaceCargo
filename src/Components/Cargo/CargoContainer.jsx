@@ -2,12 +2,9 @@ import React from 'react';
 import {addMessageActionCreator, updateNewMessageActionCreator} from "../../redux/cargo-reducer";
 import Cargo from "./Cargo";
 import {connect} from "react-redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
-let mapStateToProps = (state) =>{
-    return {
-        cargoPage: state.cargoPage
-    }
-}
 let mapDispatchToProps = (dispatch) =>{
     return{
         addMessage: () => {
@@ -19,6 +16,15 @@ let mapDispatchToProps = (dispatch) =>{
     }
 }
 
-const CargoContainer = connect(mapStateToProps, mapDispatchToProps)(Cargo);
 
-export default CargoContainer;
+let mapStateToProps = (state) =>{
+    return {
+        cargoPage: state.cargoPage
+    }
+}
+
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Cargo);

@@ -1,11 +1,7 @@
 import React from 'react';
 import './cargo.css'
-import {Navigate} from "react-router-dom";
 
 const Cargo = (props) => {
-
-    if(!props.isAuth){ return <Navigate to="/LoginForm" replace={true} /> };
-
     let newsElements = props.cargoPage.newsData.map(newsItem => <li key={newsItem.id} id={newsItem.id}> {newsItem.description}</li>);
     let messagesData = props.cargoPage.messagesData.map(message => <div key={message.id}id={message.id}>{message.message}</div>);
 

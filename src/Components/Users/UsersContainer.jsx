@@ -8,6 +8,8 @@ import {
 import {connect} from "react-redux";
 import Users from "./Users";
 import PreLoader from "../common/PreLoader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class UsersComponent extends React.Component {
 
@@ -50,14 +52,16 @@ let mapStateToProps = (state) => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
-        isAuth: state.auth.isAuth
     }
 }
 
+compose(
+    withAuthRedirect
+)(UsersComponent)
 
-export default connect(mapStateToProps, {
+export default withAuthRedirect(connect(mapStateToProps, {
     followUnfollowUserTh,
     setCurrentPage,
     toggleFollowingProgress,
     getUsers: getUsers,
-})(UsersComponent)
+})(UsersComponent))
