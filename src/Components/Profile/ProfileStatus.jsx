@@ -27,6 +27,14 @@ class ProfileStatus extends React.Component {
         })
     }
 
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if(prevProps.status !== this.props.userStatus){
+    //         this.setState({
+    //             status: this.props.userStatus
+    //         })
+    //     }
+    // }
+
     render() {
         return (
             <div className={"editableTitleContent"}>
