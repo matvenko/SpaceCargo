@@ -4,18 +4,26 @@ import './profile.css'
 class ProfileStatus extends React.Component {
 
     state = {
-        editeMode: false
+        editeMode: false,
+        status: this.props.userStatus
     }
 
-    activeEditMode(){
+    activeEditMode = () =>{
         this.setState({
             editeMode: true
         })
     }
 
-    deActiveEditMode(){
+    deActiveEditMode = () =>{
         this.setState({
             editeMode: false
+        });
+        this.props.updateUserStatus(this.state.status)
+    }
+
+    onStatusChange = (e) =>{
+        this.setState({
+            status: e.currentTarget.value
         })
     }
 
@@ -24,8 +32,8 @@ class ProfileStatus extends React.Component {
             <div className={"editableTitleContent"}>
                 <form>
                     { this.state.editeMode
-                        ? <input type={"text"} autoFocus={true} onBlur={()=>this.deActiveEditMode()} value={"Hello My Friends"} />
-                        : <p onDoubleClick={() => this.activeEditMode()}> {this.props.status} </p> }
+                        ? <input type={"text"} onChange={this.onStatusChange} autoFocus={true} onBlur={()=>this.deActiveEditMode()} value={this.state.status} />
+                        : <p onDoubleClick={() => this.activeEditMode()}> {this.props.userStatus || "No Status"} </p> }
                 </form>
 
             </div>

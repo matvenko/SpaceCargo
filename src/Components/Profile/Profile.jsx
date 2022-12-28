@@ -1,43 +1,12 @@
 import React from "react";
-import {connect} from "react-redux";
-import {getUserProfile} from "../../redux/profile-reducer";
 import PreLoader from "../common/PreLoader";
-import {useParams} from 'react-router-dom';
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
-import {compose} from "redux";
 import ProfileStatus from "./ProfileStatus";
 
-
-export function withRouter(Children){
-    return(props)=>{
-
-        const match  = {params: useParams()};
-        return <Children {...props}  match = {match}/>
-    }
-}
-
-class ProfileContainer extends  React.Component {
-
-    componentDidMount() {
-        let userId = this.props.match.params.userId;
-        if(!userId){
-            userId=17734;
-        }
-        this.props.getUserProfile(userId)
-    }
-
-    render () {
-        return (
-            <Profile {...this.props} profile={this.props.profile} />
-        )
-    }
-}
 
 let Profile = (props) => {
     if(!props.userProfile){
         return <PreLoader/>
     }
-    console.log(props.userProfile)
     return (
         <div className={"twoColumnContent"}>
 
@@ -59,18 +28,14 @@ let Profile = (props) => {
                 </ul>
             </div>
 
-            <ProfileStatus status={"Hello my friends"}/>
+            <ProfileStatus userStatus={props.userStatus} updateUserStatus={props.updateUserStatus} />
 
         </div>
     )
 }
 
-let mapStateToProps = (state) => ({
-    userProfile: state.profilePage.userProfile
-})
+export default Profile
 
-export default compose(
-    connect(mapStateToProps, {getUserProfile}),
-    withRouter,
-    withAuthRedirect
-)(ProfileContainer)
+
+
+

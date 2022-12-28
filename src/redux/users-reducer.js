@@ -76,7 +76,7 @@ export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_C
 export const getUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true));
-        userAPI.GetUsersAx(currentPage, pageSize).then(data => {
+        userAPI.getUsersAx(currentPage, pageSize).then(data => {
             dispatch(toggleIsFetching(false));
             dispatch(setUsers(data.items));
             dispatch(setTotalUsersCount(data.totalCount));
@@ -89,7 +89,7 @@ export const followUnfollowUserTh = (userId, action) => {
     return (dispatch) => {
         console.log(action === "Follow" ? "Start ---------- FollowingProcess" : "Start ---------- UnFollowingProcess")
         dispatch(toggleFollowingProgress(true, userId));
-        let ActionType = action === "Follow" ? userAPI.FollowUserAx(userId) : userAPI.UnFollowUserAx(userId);
+        let ActionType = action === "Follow" ? userAPI.followUserAx(userId) : userAPI.unFollowUserAx(userId);
         ActionType.then(data => {
             if (data.resultCode == 0) {
                 dispatch(action === "Follow" ? followSuccess(userId) : unfollowSuccess(userId))

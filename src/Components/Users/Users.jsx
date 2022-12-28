@@ -25,10 +25,10 @@ let Users = (props) => {
             </div>
             <div className={"usersTable"}>
                 {
-
                     props.users.map(u => <div key={u.id} className={"usersTableRow"}>
                         <div>
-                            <NavLink to={"/Profile/" + u.id + ""}>
+                            {/*<NavLink to={"/ProfileContainer/" + u.id + ""}>*/}
+                            <NavLink to={"/ProfileContainer/17734"}>
                                 <img src={u.photos.small != null ? u.photos.small : UserPhoto} width={"100px"}/>
                             </NavLink>
 
