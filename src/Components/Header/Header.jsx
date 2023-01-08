@@ -3,6 +3,7 @@ import './header.css'
 import {NavLink} from "react-router-dom";
 
 const Header = (props) => {
+    debugger
     return (<div className="w3_agileits_top_nav">
         <ul id="gn-menu" className="gn-menu-main">
             <li className="gn-trigger">
@@ -94,7 +95,7 @@ const Header = (props) => {
                                     <span className="prfil-img">
                                         {
                                             props.isAuth
-                                                ? props.login
+                                                ? <button onClick={props.logOutUser}>Logout</button>
                                                 : <NavLink to="/LoginForm">
                                                     <img
                                                         src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"

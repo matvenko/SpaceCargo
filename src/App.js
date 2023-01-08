@@ -5,13 +5,14 @@ import CargoContainer from "./Components/Cargo/CargoContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
+import {logOutUser} from "./redux/auth-reducer";
 
 
 const App = (props) => {
     return (
         <BrowserRouter>
             <div className="main-content">
-                <HeaderContainer></HeaderContainer>
+                <HeaderContainer logOutUser={logOutUser}></HeaderContainer>
                 <div className="clearfix"></div>
 
                 <div className="inner_content">

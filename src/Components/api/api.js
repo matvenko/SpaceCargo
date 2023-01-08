@@ -35,6 +35,14 @@ export const profileAPI = {
     },
     authMeAx(){
         return instance.get(`auth/me`, ).then(response => response.data)
+    },
+    LoginUserAx(email, password, rememberMe=false){
+        return instance.post(`auth/login`, {
+            email, password, rememberMe
+        })
+    },
+    LogoutUserAx(){
+        return instance.delete(`auth/login`)
     }
 }
 

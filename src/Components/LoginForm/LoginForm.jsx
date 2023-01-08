@@ -1,34 +1,57 @@
 import React from 'react';
-import './LoginForm.css'
-import {NavLink} from "react-router-dom";
+import { Formik, Form, Field } from 'formik';
+import s from "./Login.module.css"
+import * as Yup from 'yup';
+import {connect} from "react-redux";
+import {loginUser, logOutUser} from "../../redux/auth-reducer";
+import {Navigate, useNavigate} from "react-router-dom";
 
-const LoginForm = () => {
-    return (<div className='loginPageContent'>
+const DisplayingErrorMessagesSchema = Yup.object().shape({
+    password: Yup.string()
+        .min(2, 'Too Short!')
+        .max(15, 'Too Long!')
+        .required('Required'),
+    email: Yup.string().email('Invalid email').required('Required'),
+});
 
-            <div className="w3agileitstopnav">
-                <ul id="gn-menu" className="gn-menu-main">
+const Login = (props) => {
+    if(props.isAuth){
+        return <Navigate replace to="/ProfileContainer" />;
+    }
 
-                    <li className="second logo admin">
-                        <h1>
-                            <NavLink to="/MainPage">Space Cargo </NavLink>
-                        </h1>
-                    </li>
-                </ul>
+    return (
+        <div className={s.loginContainer}>
+            <h1>Displaying Error Messages</h1>
+            <Formik
+                initialValues={{
+                    email: '',
+                    password: '',
+                    rememberMe: false
+                }}
+                validationSchema={DisplayingErrorMessagesSchema}
+                onSubmit={values => {
+                    console.log(values);
+                    props.loginUser(values.email, values.password, values.rememberMe)
+                }}
+            >
+                {({ errors, touched }) => (
+                    <Form>
+                        <Field name="email" />
+                        {touched.email && errors.email && <div>{errors.email}</div>}
+                        <Field name="password" />
+                        {touched.password && errors.password && <div>{errors.password}</div>}
+                        <Field name="rememberMe" type={"checkbox"} />
+                        <button type="submit">Submit</button>
+                    </Form>
+                )}
+            </Formik>
+        </div>
+    )
+};
 
-            </div>
+const mapsTateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+})
 
-            <div className="clearfix"></div>
 
-            <div className="login">
-                <h1>Login</h1>
-                <form method="post">
-                    <input type="text" name="u" placeholder="Username" required="required"/>
-                    <input type="password" name="p" placeholder="Password" required="required"/>
-                    <button type="submit" className="btn btn-primary btn-block btn-large">Let me in</button>
-                </form>
-            </div>
-
-        </div>)
-}
-
-export default LoginForm;
+export default connect(mapsTateToProps, {loginUser, logOutUser})(Login)
