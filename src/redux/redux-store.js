@@ -5,13 +5,15 @@ import usersReducer from "./users-reducer";
 import profileReducer from "./profile-reducer";
 import authReducer from "./auth-reducer";
 import thunk from "redux-thunk";
+import appReducer from "./app-reducer";
 
 let reducers = combineReducers({
     cargoPage: cargoReducer,
     loginPage: loginReducer,
     usersPage: usersReducer,
     profilePage: profileReducer,
-    auth: authReducer
+    auth: authReducer,
+    app: appReducer
 });
 
 let store = createStore(reducers, applyMiddleware(thunk));

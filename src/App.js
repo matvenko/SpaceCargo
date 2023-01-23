@@ -6,29 +6,48 @@ import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import {logOutUser} from "./redux/auth-reducer";
+import {Component} from "react";
+import {connect} from "react-redux";
+import {initializeApp} from "./redux/app-reducer";
+import PreLoader from "./Components/common/PreLoader";
 
 
-const App = (props) => {
-    return (
-        <BrowserRouter>
-            <div className="main-content">
-                <HeaderContainer logOutUser={logOutUser}></HeaderContainer>
-                <div className="clearfix"></div>
+class App extends Component {
 
-                <div className="inner_content">
-                    <Routes>
-                        <Route exact path="/MainPage" element={<MainPage/>}/>
-                        <Route exact path="/Cargo" element={<CargoContainer />}/>
-                        <Route exact path="/LoginForm" element={<LoginForm/>}/>
-                        <Route exact path="/ProfileContainer/:userId" element={<ProfileContainer/>}/>
-                        <Route exact path="/" element={<LoginForm/>}/>
-                        <Route exact path="/Users" element={<UsersContainer/>} />
-                    </Routes>
+    componentDidMount() {
+        this.props.initializeApp()
+    }
+
+    render() {
+        if(!this.props.initialized){
+            return <PreLoader />
+        }
+        return (
+            <BrowserRouter>
+                <div className="main-content">
+                    <HeaderContainer logOutUser={logOutUser}></HeaderContainer>
+                    <div className="clearfix"></div>
+
+                    <div className="inner_content">
+                        <Routes>
+                            <Route exact path="/MainPage" element={<MainPage/>}/>
+                            <Route exact path="/Cargo" element={<CargoContainer/>}/>
+                            <Route exact path="/LoginForm" element={<LoginForm/>}/>
+                            <Route exact path="/ProfileContainer/:userId" element={<ProfileContainer/>}/>
+                            <Route exact path="/" element={<LoginForm/>}/>
+                            <Route exact path="/Users" element={<UsersContainer/>}/>
+                        </Routes>
+                    </div>
+
                 </div>
-
-            </div>
-        </BrowserRouter>
-    );
+            </BrowserRouter>
+        );
+    }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+    initialized: state.app.initialized
+})
+
+
+export default connect(mapStateToProps, {initializeApp})(App);
