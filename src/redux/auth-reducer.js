@@ -53,7 +53,6 @@ export const loginUser = (email, password, rememberMe) => (dispatch) => {
 
 
 export const logOutUser = () => (dispatch) => {
-    debugger
     profileAPI.LogoutUserAx().then(data => {
         dispatch(setAuthUserData(null, null, null, false));
     });

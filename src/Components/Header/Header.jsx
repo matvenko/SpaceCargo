@@ -3,7 +3,6 @@ import './header.css'
 import {NavLink} from "react-router-dom";
 
 const Header = (props) => {
-    debugger
     return (<div className="w3_agileits_top_nav">
         <ul id="gn-menu" className="gn-menu-main">
             <li className="gn-trigger">
