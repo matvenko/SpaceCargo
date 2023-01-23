@@ -10,7 +10,8 @@ let initialState = {
     login: "space",
     isFetching: false,
     isAuth: false,
-    authUserData: null
+    authUserData: null,
+    authorizedUserId: 0
 }
 
 const authReducer = (state = initialState, action) => {
