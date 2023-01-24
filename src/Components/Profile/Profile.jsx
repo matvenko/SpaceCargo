@@ -1,6 +1,7 @@
 import React from "react";
 import PreLoader from "../common/PreLoader";
 import ProfileStatus from "./ProfileStatus";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 
 let Profile = (props) => {
@@ -28,7 +29,7 @@ let Profile = (props) => {
                 </ul>
             </div>
 
-            <ProfileStatus userStatus={props.userStatus} updateUserStatus={props.updateUserStatus} />
+            <ProfileStatusWithHooks userStatus={props.userStatus} updateUserStatus={props.updateUserStatus} />
 
         </div>
     )
