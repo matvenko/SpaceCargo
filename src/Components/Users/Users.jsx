@@ -1,46 +1,21 @@
 import React from "react";
-import UserPhoto from "../../assets/images/tako.jpg";
-import { NavLink} from "react-router-dom";
+import Pagination from "../common/Pagination";
+import User from "./User";
 
 let Users = (props) => {
-
-    // let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pageCount = 40;
-    let pages = [];
-    for (let i = 1; i <= pageCount; i++) {
-        pages.push(i)
-    }
     return (
         <div>
-            <div className={"pagination"}>
-                {
-                    pages.map(p =>
-                        <span key={p} className={props.currentPage === p ? "selectedPage" : ''}
-                              onClick={() => { props.onSetCurrentPage(p) }}>
-                            {p}
-                        </span>
-                    )
-                }
-
-            </div>
+            <Pagination currentPage={props.currentPage}
+                        onSetCurrentPage={props.onSetCurrentPage}
+                        totalUsersCount={props.totalUsersCount}
+                        pageSize={props.pageSize}/>
             <div className={"usersTable"}>
                 {
-                    props.users.map(u => <div key={u.id} className={"usersTableRow"}>
-                        <div>
-                            <NavLink to={"/ProfileContainer/" + u.id + ""}>
-                                <img src={u.photos.small != null ? u.photos.small : UserPhoto} width={"100px"}/>
-                            </NavLink>
-
-
-                            <button disabled={props.followingInProgress.some(id => id === u.id)}
-                                    onClick={() => { props.followUnfollowUserTh(u.id, u.followed ? 'UnFollow' : 'Follow') }}>
-                                {u.followed ? 'UnFollow' : 'Follow'}
-                            </button>
-                        </div>
-                        <div> {u.name} </div>
-                        <div> {u.status ? u.status : 'Beginner'} </div>
-                        <div> DELETE</div>
-                    </div>)
+                    props.users.map(u => <User key={u.id}
+                                               user={u}
+                                               followingInProgress={props.followingInProgress}
+                                               followUnfollowUserTh={props.followUnfollowUserTh}
+                    />)
                 }
             </div>
         </div>

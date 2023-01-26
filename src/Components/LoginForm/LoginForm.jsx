@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import {Formik, Form, Field} from 'formik';
 import s from "./Login.module.css"
 import * as Yup from 'yup';
 import {connect} from "react-redux";
@@ -15,8 +15,8 @@ const DisplayingErrorMessagesSchema = Yup.object().shape({
 });
 
 const Login = (props) => {
-    if(props.isAuth){
-        return <Navigate replace to="/ProfileContainer" />;
+    if (props.isAuth) {
+        return <Navigate replace to="/ProfileContainer/17734"/>;
     }
 
     return (
@@ -34,13 +34,13 @@ const Login = (props) => {
                     props.loginUser(values.email, values.password, values.rememberMe)
                 }}
             >
-                {({ errors, touched }) => (
+                {({errors, touched}) => (
                     <Form>
-                        <Field name="email" />
+                        <Field name="email"/>
                         {touched.email && errors.email && <div>{errors.email}</div>}
-                        <Field name="password" />
+                        <Field name="password"/>
                         {touched.password && errors.password && <div>{errors.password}</div>}
-                        <Field name="rememberMe" type={"checkbox"} />
+                        <Field name="rememberMe" type={"checkbox"}/>
                         <button type="submit">Submit</button>
                     </Form>
                 )}

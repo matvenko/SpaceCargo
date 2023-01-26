@@ -25,7 +25,10 @@ class ProfileContainer extends React.Component{
         }
         this.props.getUserProfile(userId);
         this.props.getUserStatus(userId);
+    }
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return nextProps !== this.props || nextState !== this.state;
     }
 
     render(){
@@ -48,5 +51,6 @@ let mapStateToProps = (state) => ({
 
 export default compose(
     connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus}),
-    withRouter
+    withRouter,
+    withAuthRedirect
 )(ProfileContainer)

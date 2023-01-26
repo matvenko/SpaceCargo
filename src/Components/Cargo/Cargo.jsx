@@ -1,7 +1,7 @@
 import React from 'react';
 import './cargo.css'
 
-const Cargo = (props) => {
+const Cargo = React.memo(props => {
     let newsElements = props.cargoPage.newsData.map(newsItem => <li key={newsItem.id} id={newsItem.id}> {newsItem.description}</li>);
     let messagesData = props.cargoPage.messagesData.map(message => <div key={message.id}id={message.id}>{message.message}</div>);
 
@@ -38,6 +38,6 @@ const Cargo = (props) => {
             </div>
         </div>
     )
-}
+});
 
 export default Cargo;

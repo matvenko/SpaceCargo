@@ -19,8 +19,8 @@ class App extends Component {
     }
 
     render() {
-        if(!this.props.initialized){
-            return <PreLoader />
+        if (!this.props.initialized) {
+            return <PreLoader/>
         }
         return (
             <BrowserRouter>

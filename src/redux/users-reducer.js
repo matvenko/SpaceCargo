@@ -9,20 +9,14 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const TOGGLE_BUTTON_DISABLE = 'TOGGLE_BUTTON_DISABLE'
 
 let initialState = {
-    users: [],
-    pageSize: 10,
-    totalUsersCount: 0,
-    currentPage: 1,
-    isFetching: false,
-    followingInProgress: []
+    users: [], pageSize: 10, totalUsersCount: 0, currentPage: 1, isFetching: false, followingInProgress: []
 }
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case FOLLOW:
             return {
-                ...state,
-                users: state.users.map(u => {
+                ...state, users: state.users.map(u => {
                     if (u.id === action.userId) {
                         return {...u, followed: true}
                     }
@@ -31,8 +25,7 @@ const usersReducer = (state = initialState, action) => {
             }
         case UNFOLLOW:
             return {
-                ...state,
-                users: state.users.map(u => {
+                ...state, users: state.users.map(u => {
                     if (u.id === action.userId) {
                         return {...u, followed: false}
                     }
@@ -54,9 +47,7 @@ const usersReducer = (state = initialState, action) => {
         case TOGGLE_BUTTON_DISABLE: {
             return {
                 ...state,
-                followingInProgress: action.isFetching
-                    ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id !== action.userId)
+                followingInProgress: action.isFetching ? [...state.followingInProgress, action.userId] : state.followingInProgress.filter(id => id !== action.userId)
             }
         }
         default:
@@ -74,28 +65,26 @@ export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_C
 
 
 export const requestUsers = (currentPage, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleIsFetching(true));
-        userAPI.getUsersAx(currentPage, pageSize).then(data => {
-            dispatch(toggleIsFetching(false));
-            dispatch(setUsers(data.items));
-            dispatch(setTotalUsersCount(data.totalCount));
-        });
+        let data = await userAPI.getUsersAx(currentPage, pageSize);
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUsersCount(data.totalCount));
     }
 }
 
 
 export const followUnfollowUserTh = (userId, action) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         console.log(action === "Follow" ? "Start ---------- FollowingProcess" : "Start ---------- UnFollowingProcess")
         dispatch(toggleFollowingProgress(true, userId));
         let ActionType = action === "Follow" ? userAPI.followUserAx(userId) : userAPI.unFollowUserAx(userId);
-        ActionType.then(data => {
-            if (data.resultCode == 0) {
-                dispatch(action === "Follow" ? followSuccess(userId) : unfollowSuccess(userId))
-            }
-            dispatch(toggleFollowingProgress(false, userId));
-        });
+        let data = await ActionType;
+        if (data.resultCode == 0) {
+            dispatch(action === "Follow" ? followSuccess(userId) : unfollowSuccess(userId))
+        }
+        dispatch(toggleFollowingProgress(false, userId));
     }
 }
 

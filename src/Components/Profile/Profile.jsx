@@ -1,7 +1,7 @@
 import React from "react";
 import PreLoader from "../common/PreLoader";
-import ProfileStatus from "./ProfileStatus";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import UserPhoto from "../../assets/images/profile.jpg";
 
 
 let Profile = (props) => {
@@ -11,7 +11,9 @@ let Profile = (props) => {
     return (
         <div className={"twoColumnContent"}>
 
-            <div><img src={props.userProfile.photos.small} /> </div>
+            <div>
+                <img src={props.userProfile.photos.small != null ? props.userProfile.photos.small : UserPhoto} width={"100px"}/>
+            </div>
             <div>{props.userProfile.lookingForAJobDescription}</div>
 
             <div>FullName</div>

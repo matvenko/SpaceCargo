@@ -94,7 +94,7 @@ const Header = (props) => {
                                     <span className="prfil-img">
                                         {
                                             props.isAuth
-                                                ? <button onClick={props.logOutUser}>Logout</button>
+                                                ? <div>{props.login} - <button onClick={props.logOutUser}>Logout</button></div>
                                                 : <NavLink to="/LoginForm">
                                                     <img
                                                         src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"

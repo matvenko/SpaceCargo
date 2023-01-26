@@ -16,16 +16,19 @@ import {
     getTotalUsersCount,
     getUsersSelector
 } from "../../redux/users-selectors";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize);
+        let {requestUsers, currentPage, pageSize} = this.props
+        requestUsers(currentPage, pageSize);
     }
 
     onSetCurrentPage = (currentPage) => {
-        this.props.setCurrentPage(currentPage);
-        this.props.requestUsers(currentPage, this.props.pageSize);
+        let {setCurrentPage, requestUsers, pageSize} = this.props
+        setCurrentPage(currentPage);
+        requestUsers(currentPage, pageSize);
     }
 
     render() {
@@ -67,5 +70,5 @@ export default compose(
         setCurrentPage,
         toggleFollowingProgress,
         requestUsers
-    }))
-    (UsersContainer)
+    }), withAuthRedirect)
+(UsersContainer)
