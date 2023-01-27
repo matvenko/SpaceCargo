@@ -7,7 +7,7 @@ let Users = (props) => {
         <div>
             <Pagination currentPage={props.currentPage}
                         onSetCurrentPage={props.onSetCurrentPage}
-                        totalUsersCount={props.totalUsersCount}
+                        totalItemsCount={props.totalItemsCount}
                         pageSize={props.pageSize}/>
             <div className={"usersTable"}>
                 {

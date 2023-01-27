@@ -9,7 +9,12 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const TOGGLE_BUTTON_DISABLE = 'TOGGLE_BUTTON_DISABLE'
 
 let initialState = {
-    users: [], pageSize: 10, totalUsersCount: 0, currentPage: 1, isFetching: false, followingInProgress: []
+    users: [],
+    pageSize: 10,
+    totalItemsCount: 0,
+    currentPage: 1,
+    isFetching: false,
+    followingInProgress: []
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -39,7 +44,7 @@ const usersReducer = (state = initialState, action) => {
             return {...state, currentPage: action.currentPage}
         }
         case SET_TOTAL_USERS_COUNT: {
-            return {...state, totalUsersCount: action.totalUsersCount}
+            return {...state, totalItemsCount: action.totalItemsCount}
         }
         case TOGGLE_IS_FETCHING: {
             return {...state, isFetching: action.isFetching}
@@ -61,7 +66,7 @@ export const setUsers = (users) => ({type: SET_USERS, users})
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
 export const toggleFollowingProgress = (isFetching, userId) => ({type: TOGGLE_BUTTON_DISABLE, isFetching, userId})
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage})
-export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount})
+export const setTotalItemsCount = (totalItemsCount) => ({type: SET_TOTAL_USERS_COUNT, totalItemsCount})
 
 
 export const requestUsers = (currentPage, pageSize) => {
@@ -70,7 +75,7 @@ export const requestUsers = (currentPage, pageSize) => {
         let data = await userAPI.getUsersAx(currentPage, pageSize);
         dispatch(toggleIsFetching(false));
         dispatch(setUsers(data.items));
-        dispatch(setTotalUsersCount(data.totalCount));
+        dispatch(setTotalItemsCount(data.totalCount));
     }
 }
 
