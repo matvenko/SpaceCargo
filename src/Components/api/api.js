@@ -43,6 +43,11 @@ export const profileAPI = {
     },
     LogoutUserAx() {
         return http.delete(`auth/login`)
+    },
+    savePhoto(photoFile){
+        let formData = new FormData();
+        formData.append("image", photoFile);
+        return http.put(`/profile/photo`, formData).then(response => response.data)
     }
 }
 

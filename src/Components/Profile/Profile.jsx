@@ -5,14 +5,25 @@ import UserPhoto from "../../assets/images/profile.jpg";
 
 
 let Profile = (props) => {
+
+    console.log("Render")
+
     if(!props.userProfile){
         return <PreLoader/>
     }
+
+    const onMainPhotoSelected = (e) => {
+        if(e.target.files.length){
+            props.savePhoto(e.target.files[0])
+        }
+    }
+
     return (
         <div className={"twoColumnContent"}>
 
             <div>
                 <img src={props.userProfile.photos.small != null ? props.userProfile.photos.small : UserPhoto} width={"100px"}/>
+                {props.isOwner && <input type={"file"} onChange={onMainPhotoSelected} />}
             </div>
             <div>{props.userProfile.lookingForAJobDescription}</div>
 

@@ -34,6 +34,7 @@ class App extends Component {
                                     <Route exact path="/Cargo" element={<CargoContainer/>}/>
                                     <Route exact path="/LoginForm" element={<LoginForm/>}/>
                                     <Route exact path="/ProfileContainer/:userId" element={<ProfileContainer/>}/>
+                                    <Route exact path="/ProfileContainer/" element={<ProfileContainer/>}/>
                                     <Route exact path="/" element={<LoginForm/>}/>
                                     <Route exact path="/Users" element={<UsersContainer/>}/>
                                 </Routes>
