@@ -3,7 +3,6 @@ import './profile.css'
 
 const ProfileStatusWithHooks = (props) => {
 
-
     let [editMode, setEditMode] = useState(false);
     let [userStatus, setStatus] = useState(props.userStatus)
 
@@ -30,7 +29,7 @@ const ProfileStatusWithHooks = (props) => {
                     <p onDoubleClick={() => activeEditMode()}> {props.userStatus || "No Status"} </p>
                 }
                 {editMode &&
-                    <input type={"text"} onBlur={deActiveEditMode} onChange={onStatusChange}  autoFocus={true} value={userStatus}/>
+                    <input type="text" onBlur={deActiveEditMode} onChange={onStatusChange}  autoFocus={true} value={userStatus}/>
                 }
             </form>
 

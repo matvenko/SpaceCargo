@@ -42,7 +42,7 @@ export const getUserStatus = (userId) => async (dispatch) => {
 
 export const updateUserStatus = (status) => async (dispatch) => {
     let response = await profileAPI.updateStatusAx(status);
-    if (response.data.resultCode === 0) {
+    if (response.resultCode === 0) {
         dispatch(setUserStatus(status))
     }
 }

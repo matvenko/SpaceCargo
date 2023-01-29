@@ -5,9 +5,6 @@ import UserPhoto from "../../assets/images/profile.jpg";
 
 
 let Profile = (props) => {
-
-    console.log("Render")
-
     if(!props.userProfile){
         return <PreLoader/>
     }
